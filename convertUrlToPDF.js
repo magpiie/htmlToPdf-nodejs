@@ -1,16 +1,16 @@
 // convertUrlToPDF.js
 
-import { launch } from 'puppeteer';
-import { get } from 'axios';
-import fs from 'fs';
+const puppeteer = require('puppeteer');
+const axios = require('axios');
+const fs = require('fs');
 
 async function convertUrlToPDF(url, outputPath) {
 	// URL로부터 HTML 가져오기
-	const response = await get(url);
+	const response = await axios.get(url);
 	const htmlContent = response.data;
 
 	// HTML을 PDF로 변환
-	const browser = await launch();
+	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
 
 	await page.setContent(htmlContent, { waitUntil: 'networkidle2' });
@@ -19,4 +19,4 @@ async function convertUrlToPDF(url, outputPath) {
 	await browser.close();
 }
 
-export default convertUrlToPDF;
+module.exports = convertUrlToPDF;
