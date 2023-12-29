@@ -1,10 +1,10 @@
 // convertToPDF.js
 
-const puppeteer = require('puppeteer');
-const fs = require('fs');
+import { launch } from 'puppeteer';
+import fs from 'fs';
 
 async function convertToPDF(htmlContent, outputPath) {
-	const browser = await puppeteer.launch();
+	const browser = await launch();
 	const page = await browser.newPage();
 
 	// HTML 문자열을 로드
@@ -16,4 +16,4 @@ async function convertToPDF(htmlContent, outputPath) {
 	await browser.close();
 }
 
-module.exports = convertToPDF;
+export default convertToPDF;
